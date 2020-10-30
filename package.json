@@ -1,0 +1,28 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "Khai's CV",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khaidongduc/CV.git"
+  },
+  "author": "Khai Dong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khaidongduc/CV/issues"
+  },
+  "homepage": "https://github.com/khaidongduc/CV#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "ejs-mate": "^3.0.0",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.10.11",
+    "sanitize-html": "^2.1.1"
+  }
+}

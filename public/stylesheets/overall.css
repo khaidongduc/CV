@@ -1,0 +1,15 @@
+.header{
+    font-size: 4.0rem;
+    border-bottom: 10px skyblue solid;
+    position: center;
+    text-align: center;    
+    margin-bottom: 70px;
+    padding-bottom: 10px;
+}
+.container-fluid{
+    width: 100%;
+    padding-right: 10%;
+    padding-left: 10%;
+    margin-right: auto;
+    margin-left: auto;  
+}
