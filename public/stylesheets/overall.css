@@ -16,6 +16,11 @@ h1, h2, h3, a{
     font-family: 'Oswald', sans-serif;
 }
 
+p{
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .container-fluid{
     width: 100%;
     padding-right: 10%;
