@@ -1,13 +1,12 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/iframe.css">
 
-<h1 class="mt-4 header">CV</h1>
+<h1 class="header">Curriculum Vitae</h1>
 <div class="container">
     <iframe class="responsive-iframe"
         src="https://drive.google.com/file/d/1RFEHp0oPQ1EyXx2-VjQ-cIF6akfl-f1D/preview"></iframe>
 </div>
-<style>
-    #cv-nav {
-        background-color: #dae0e5 !important;
-    }
-</style>
+
+<script>
+    $("#cv-nav").addClass('current-nav');
+</script>
