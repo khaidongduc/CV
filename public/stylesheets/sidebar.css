@@ -6,6 +6,10 @@
     overflow-x: hidden;
 }
 
+.list-group-item, .sidebar-heading{
+    font-family: 'Oswald', sans-serif;
+}
+
 .sidebar-wrapper {
     min-height: 100vh;
     margin-left: calc(0rem - var(--sidebar-size));

@@ -11,7 +11,10 @@ const ejsMate = require('ejs-mate');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
+const ExpressError = require('./utils/ExpressError');
+
 const projectRoute = require('./routes/project');
+const cvRoute = require('./routes/cv');
 
 // connect to database
 mongoose.connect(DB_URL, {
@@ -42,14 +45,22 @@ app.get('/', (req, res) => {
     res.render("home.ejs");
 })
 
-app.get('/cv', (req, res) => {
-    res.render("cv/main");
-})
+app.use('/cv', cvRoute);
 
 app.use('/projects', projectRoute);
 
 app.get('/photography', (req, res) => {
     res.render("photography/main");
+})
+
+// Error handling
+app.all("*", (req, res, next) => {
+    next(new ExpressError(404, 'Page Not Found'))
+})
+app.use((err, req, res, next) => {
+    let { statusCode = 500, message = "Something went wrong" } = err;
+    if (!err.message) err.message = "Something Went Wrong";
+    res.status(statusCode).send(err.message);
 })
 
 app.listen(PORT, (req, res) => {

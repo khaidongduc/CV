@@ -2,10 +2,25 @@
 <link rel="stylesheet" href="/stylesheets/iframe.css">
 
 <h1 class="header">Curriculum Vitae</h1>
-<div class="container">
-    <iframe class="responsive-iframe"
-        src="https://drive.google.com/file/d/1RFEHp0oPQ1EyXx2-VjQ-cIF6akfl-f1D/preview"></iframe>
+
+<div class="container my-3 row border-0">
+    <a class="btn btn-primary mr-1" href="/cv/edit"> Change CV </a>
+    <% if(cv){ %>
+    <form class="d-inline" action="/cv?_method=DELETE" method="post">
+        <button class="btn btn-danger"> Delete CV </button>
+    </form>
+    <% } %> 
 </div>
+
+<% if(cv){ %>
+<div class="iframe-container">
+    <iframe class="responsive-iframe" src="<%= cv.url %>"></iframe>
+</div>
+<% } else { %>
+<p class="text-center">There is nothing here</p>
+<% } %>
+
+
 
 <script>
     $("#cv-nav").addClass('current-nav');
