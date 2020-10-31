@@ -4,11 +4,13 @@
 <h1 class="header">Curriculum Vitae</h1>
 
 <div class="container my-3 row border-0">
-    <a class="btn btn-primary mr-1" href="/cv/edit"> <%= (cv) ? "Change" : "Add" %></a>
+    <% if(currentUser){ %>
+    <a class="btn btn-primary mr-1" href="/cv/edit"> <%= (cv) ? "Change" : "Add" %></a> 
     <% if(cv){ %>
     <form class="d-inline" action="/cv?_method=DELETE" method="post">
         <button class="btn btn-danger"> Delete </button>
     </form>
+    <% } %> 
     <% } %> 
 </div>
 
@@ -16,9 +18,8 @@
 <div class="iframe-container">
     <iframe class="responsive-iframe" src="<%= cv.url %>"></iframe>
 </div>
-<% } else { %>
-<p class="text-center">There is nothing here</p>
-<% } %>
+<% }%>
+
 
 
 

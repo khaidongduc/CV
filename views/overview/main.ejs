@@ -5,7 +5,9 @@
     <% if(overview){ %>
     <div class="col-12 col-md-7">
         <%- overview.htmlBody %>
+        <% if(currentUser){ %>
         <button class="btn btn-primary mt-3" id="toggle-edit-form"><%= (overview) ? "Edit" : "Add" %> Overview </button>
+        <% } %>
     </div>
     <div class="col-12 col-md-5 mb-3">
         <% if(overview.images.length){ %>
