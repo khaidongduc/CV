@@ -1,5 +1,6 @@
 const express = require('express');
 
+const { ensureLoggedIn } = require('../utils/middlewares');
 
 const { storage } = require('../cloudinary');
 const upload = require('multer')({ storage });
@@ -20,7 +21,7 @@ router.route('/')
         }
         res.render("cv/main", { cv });
     }))
-    .post(upload.single("cv"), wrapAsync(async (req, res) => {
+    .post(ensureLoggedIn, upload.single("cv"), wrapAsync(async (req, res) => {
         const cv = await CV.findOne({});
         if (cv) cloudinary.uploader.destroy(`${cv.filename}`);
         await CV.deleteMany({});
@@ -31,7 +32,7 @@ router.route('/')
 
         res.redirect("/cv");
     }))
-    .delete(wrapAsync(async (req, res) => {
+    .delete(ensureLoggedIn, wrapAsync(async (req, res) => {
         const cv = await CV.findOne({});
         cloudinary.uploader.destroy(cv.filename);
         await CV.deleteMany({});

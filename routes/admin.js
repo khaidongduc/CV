@@ -3,6 +3,7 @@ const passport = require('passport')
 
 const wrapAsync = require("../utils/wrapAsync");
 const { User } = require("../models/user");
+const { ensureLoggedIn } = require('../utils/middlewares');
 const router = express.Router();
 
 router.route('/login')
@@ -32,5 +33,10 @@ router.route('/register')
             res.redirect('/admin/register');
         }
     }))
+
+router.post("/logout", ensureLoggedIn, (req, res, next) => {
+    req.logOut();
+    res.redirect('/');
+})
 
 module.exports = router;

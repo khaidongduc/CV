@@ -1,5 +1,6 @@
 const express = require('express');
 
+const { ensureLoggedIn } = require('../utils/middlewares');
 const wrapAsync = require("../utils/wrapAsync");
 const { Overview } = require("../models/overview");
 
@@ -20,7 +21,7 @@ router.route('/')
         
         res.render("overview/main", { overview });
     }))
-    .post(upload.array("overview[images]"), wrapAsync(async (req, res, next) => {
+    .post(ensureLoggedIn, upload.array("overview[images]"), wrapAsync(async (req, res, next) => {
         const overview = await Overview.findOne({});
         if (overview) {
             for (image of overview.images) {

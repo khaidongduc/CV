@@ -28,3 +28,9 @@ p{
     margin-right: auto;
     margin-left: auto;  
 }
+
+@media (max-width: 500px){
+    .header{
+        font-size: 3.0rem;
+    }
+}
