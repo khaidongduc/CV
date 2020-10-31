@@ -2,13 +2,11 @@
 
 <div class="row">
     <div class="col-10 offset-1 col-md-6 offset-md-3 mb-3">
-        <h1 class="mx-auto">Edit Project</h1>
-        <form class="d-inline validated-form" action="/projects/<%= project._id %>?_method=PATCH" method="POST"
-            novalidate>
+        <h1 class="mx-auto">New Project</h1>
+        <form class="d-inline validated-form" action="/projects" method="POST" novalidate>
             <div class="mb-3">
                 <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="project[title]" required autofocus
-                    value="<%=project.title %>">
+                <input class="form-control" type="text" id="title" name="project[title]" required autofocus>
                 <div class="valid-feedback">
                     Looks good
                 </div>
@@ -16,8 +14,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="url">Project URL</label>
-                <input rows="5" class="form-control" type="url" id="url" name="project[url]" value="<%= project.url %>"
-                    required>
+                <input rows="5" class="form-control" type="url" id="url" name="project[url]" required>
                 <div class="valid-feedback">
                     Looks good
                 </div>
@@ -25,8 +22,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="repository"> Repository </label>
-                <input rows="5" class="form-control" type="text" id="repository" name="project[repository]"
-                    value="<%= project.repository %>" required>
+                <input rows="5" class="form-control" type="text" id="repository" name="project[repository]" required>
                 <div class="valid-feedback">
                     Looks good
                 </div>
@@ -34,8 +30,8 @@
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description</label>
-                <textarea rows="5" class="form-control" type="text" id="description" name="project[description]"
-                    required><%= project.description %></textarea>
+                <textarea rows="5" class="form-control" type="text" id="description"
+                    name="project[description]" required></textarea>
                 <div class="valid-feedback">
                     Looks good
                 </div>
@@ -44,13 +40,13 @@
             <div class="mb-3">
                 <label class="form-label" for="description-html">HTML Description (Optional)</label>
                 <textarea rows="5" class="form-control" type="text" id="html-description"
-                    name="project[htmlDescription]"><%= project.htmlDescription %></textarea>
+                    name="project[htmlDescription]"></textarea>
                 <div class="valid-feedback">
                     Looks good
                 </div>
             </div>
 
-            <button class="btn btn-success">Edit Project</button>
+            <button class="btn btn-success">New Project</button>
         </form>
         <a class="d-inline btn btn-primary" href="/projects">Back</a>
     </div>

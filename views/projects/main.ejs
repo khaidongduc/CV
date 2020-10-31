@@ -3,8 +3,10 @@
 <link rel="stylesheet" href="/stylesheets/project.css">
 
 <h1 class="header">Programming Projects</h1>
-
 <div class="projects-container row">
+    <div class="mb-3 col-12 card border-0">
+        <a class="card-link btn btn-primary" href="/projects/new"> New Project </a>
+    </div>
     <% if(projects.length){ %>
     <% projects.forEach(project => { %>
     <div class="mb-3 col-12">
@@ -12,19 +14,20 @@
             <div class="card-body">
                 <h3 class="card-title"><%= project.title %></h3>
                 <% if(project.htmlDescription){ %>
-                <%- project.htmlDescription %> 
-                <% } else { %>  
+                <%- project.htmlDescription %>
+                <% } else { %>
                 <p class="card-text"><%- project.description.replace(/[\r\n]/g, "<br>"); %></p>
-                <% } %> 
-                <a class="card-link btn btn-primary" href="<%= project.repository %>" target="_blank"> Repository </a>
+                <% } %>
+                <a class="card-link btn btn-success" href="<%= project.repository %>" target="_blank"> Repository </a>
                 <% if(project.url){ %>
                 <a class="card-link btn btn-secondary" href="<%= project.url %>" target="_blank"> Website </a>
                 <% } %>
+                <a class="card-link btn btn-danger float-right" href="/projects/<%= project._id %>/edit"> Edit Project
+                </a>
             </div>
         </div>
     </div>
     <% }) %>
-
 </div>
 
 <% } else { %>

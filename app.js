@@ -8,11 +8,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const ejsMate = require('ejs-mate');
+const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
-
-const wrapAsync = require("./utils/wrapAsync");
-const Project = require("./models/project");
+const projectRoute = require('./routes/project');
 
 // connect to database
 mongoose.connect(DB_URL, {
@@ -35,6 +34,7 @@ app.engine('ejs', ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(methodOverride("_method"));
 
@@ -46,16 +46,12 @@ app.get('/cv', (req, res) => {
     res.render("cv/main");
 })
 
-app.get('/projects', wrapAsync(async (req, res, next) => {
-    const projects = await Project.find({});
-    console.log(projects);
-    res.render("projects/main", {projects});
-}))
+app.use('/projects', projectRoute);
 
 app.get('/photography', (req, res) => {
     res.render("photography/main");
 })
 
-app.listen(PORT, (req, res) =>{
+app.listen(PORT, (req, res) => {
     console.log(`Serving on port ${PORT}`)
 })
