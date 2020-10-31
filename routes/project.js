@@ -1,8 +1,7 @@
 const express = require('express');
 
 const wrapAsync = require("../utils/wrapAsync");
-const Project = require("../models/project");
-const { findByIdAndUpdate } = require('../models/project');
+const { Project } = require("../models/project");
 
 const router = express.Router();
 
@@ -12,7 +11,7 @@ router.route('/')
         res.render("projects/main", { projects });
     }))
     .post(wrapAsync(async (req, res, next) => {
-        const project = new Project({...req.body.project});
+        const project = new Project({ ...req.body.project });
         project.save();
         res.redirect('/projects')
     }))

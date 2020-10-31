@@ -6,7 +6,7 @@ const upload = require('multer')({ storage });
 const { cloudinary } = require("../cloudinary");
 
 const wrapAsync = require("../utils/wrapAsync");
-const CV = require("../models/cv");
+const { CV } = require("../models/cv");
 
 const router = express.Router();
 
@@ -16,13 +16,13 @@ router.route('/')
         try {
             cv = await CV.findOne({});
         } catch (error) {
-            cv = null;  
+            cv = null;
         }
         res.render("cv/main", { cv });
     }))
     .post(upload.single("cv"), wrapAsync(async (req, res) => {
         const cv = await CV.findOne({});
-        if(cv) cloudinary.uploader.destroy(`${cv.filename}`);
+        if (cv) cloudinary.uploader.destroy(`${cv.filename}`);
         await CV.deleteMany({});
         await new CV({
             url: req.file.path,

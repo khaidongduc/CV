@@ -22,4 +22,5 @@ const projectSchema = new Schema({
     }
 });
 
-module.exports = moongoose.model("Project", projectSchema);
+module.exports.Project = moongoose.model("Project", projectSchema);
+module.exports.projectSchema = projectSchema;

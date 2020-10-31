@@ -6,4 +6,5 @@ const cvSchema = new Schema({
     filename: String
 });
 
-module.exports = moongoose.model("CV", cvSchema);
+module.exports.CV = moongoose.model("CV", cvSchema);
+module.exports.cvSchema = cvSchema;

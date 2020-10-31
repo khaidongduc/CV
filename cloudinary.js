@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: 'CV',
-        allowFormats: ['pdf']
+        allowFormats: ['pdf', 'png', 'jpeg', 'jpg']
     }
 });
 

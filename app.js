@@ -13,8 +13,10 @@ const methodOverride = require('method-override');
 
 const ExpressError = require('./utils/ExpressError');
 
+const overviewRoute = require('./routes/overview');
 const projectRoute = require('./routes/project');
 const cvRoute = require('./routes/cv');
+
 
 // connect to database
 mongoose.connect(DB_URL, {
@@ -42,11 +44,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride("_method"));
 
 app.get('/', (req, res) => {
-    res.render("home.ejs");
+    res.redirect('/overview');
 })
 
+app.use('/overview', overviewRoute);
 app.use('/cv', cvRoute);
-
 app.use('/projects', projectRoute);
 
 app.get('/photography', (req, res) => {
