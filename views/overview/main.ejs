@@ -1,68 +1,8 @@
 <% layout('layouts/boilerplate') %>
 
 <h1 class="header">Overview</h1>
-<div class="row" id="current-text">
-    <% if(overview){ %>
-    <div class="col-12 col-md-7">
-        <%- overview.htmlBody %>
-        <% if(currentUser){ %>
-        <button class="btn btn-primary my-3" id="toggle-edit-form"><%= (overview) ? "Edit" : "Add" %> Overview </button>
-        <% } %>
-    </div>
-    <div class="col-12 col-md-5 mb-3">
-        <% if(overview.images.length){ %>
-        <div id="imgsCarousel" class="carousel slide" data-ride="carousel" data-interval="1000">
-            <div class="carousel-inner">
-                <% overview.images.forEach((img, i) => { %>
-                <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-                    <img class="d-block w-100" src="<%= img.url %>">
-                </div>
-                <% }) %>
-            </div>
-            <% if(overview.images.length > 1){ %>
-            <a class="carousel-control-prev" href="#imgsCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#imgsCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            <% } %>
-        </div>
-        <% }%>
-    </div>
-    <% } %>
-</div>
+<%- include('../partials/overview', {overview_post_url: "/overview"}) %>
 
-<div class="row d-none" id="edit-box">
-    <div class="col-12 col-md-7">
-        <form class="d-inline validated-form" action="/overview" method="POST" enctype="multipart/form-data" novalidate>
-            <div class="mb-3">
-                <div class="mb-3">
-                    <label class="form-label" for="overview[htmlBody]">HTML Body</label>
-                    <textarea rows="10" class="form-control" type="text" id="overview[htmlBody]"
-                        name="overview[htmlBody]"><%= (overview) ? overview.htmlBody : "" %></textarea>
-                    <div class="valid-feedback">
-                        Looks good
-                    </div>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="overview[images]" id="overview[images]" multiple
-                        required>
-                    <label class="custom-file-label" for="overview[images]">Choose image(s)</label>
-                    <div class="valid-feedback">
-                        Looks good
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-success">Edit Overview</button>
-        </form>
-        <button class="d-inline btn btn-primary" id="cancel-edit">Back</button>
-    </div>
-
-    <script>
-        $("#overview-nav").addClass('current-nav');
-    </script>
-
-    <script src="/scripts/overview_edit_form_toggle.js"></script>
+<script>
+    $("#overview-nav").addClass('current-nav');
+</script>

@@ -2,13 +2,11 @@
 
 <link rel="stylesheet" href="/stylesheets/project.css">
 
-<h1 class="header">Programming Projects</h1>
+<h1 class="header">Programming</h1>
+
+<%- include('../partials/overview', {overview_post_url: "/projects/overview"}) %>
+<hr>
 <div class="projects-container row">
-    <div class="mb-3 col-12 card border-0">
-        <% if(currentUser){ %>
-        <a class="card-link btn btn-primary" href="/projects/new"> New Project </a>
-        <% } %> 
-    </div>
     <% if(projects.length){ %>
     <% projects.forEach(project => { %>
     <div class="mb-3 col-12">
@@ -26,12 +24,17 @@
                 <% } %>
                 <% if(currentUser){ %>
                 <a class="card-link btn btn-danger float-right" href="/projects/<%= project._id %>/edit"> Edit Project
-                <% } %> 
+                    <% } %>
                 </a>
             </div>
         </div>
     </div>
     <% }) %>
+    <% if(currentUser){ %>
+    <div class="mb-3 col-12 card border-0">
+        <a class="card-link btn btn-primary" href="/projects/new"> New Project </a>
+    </div>
+    <% } %>
 </div>
 
 <% } %>

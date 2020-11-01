@@ -1,8 +1,10 @@
 <% layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/iframe.css">
 <h1 class="header">Photography</h1>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat libero, eos amet, cum dignissimos obcaecati
-    necessitatibus vero numquam ut temporibus doloremque eum qui. Odit quis vitae minus nesciunt quos cum?</p>
+
+<%- include('../partials/overview', {overview_post_url: "/overview"}) %>
+<hr>
+
 <div class="row mb-5">
     <div class="col col-lg-4 col-sm-6">
         <div class="img-thumbnail">

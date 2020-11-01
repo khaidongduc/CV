@@ -7,6 +7,10 @@ const overviewSchema = new Schema({
     htmlBody:{
         type: String,
     },
+    forArticle: {
+        type: String,
+        unique: true
+    },
     images: [imageSchema]
 });
 

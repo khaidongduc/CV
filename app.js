@@ -9,9 +9,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const ejsMate = require('ejs-mate');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+const session = require('express-session');
 const passport = require('passport')
 const LocalPassport = require('passport-local');
 
@@ -99,7 +100,7 @@ app.use('/cv', cvRoute);
 app.use('/projects', projectRoute);
 
 app.get('/photography', (req, res) => {
-    res.render("photography/main");
+    res.render("photography/main", {overview: null});
 })
 
 // Error handling

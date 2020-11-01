@@ -3,19 +3,45 @@ const express = require('express');
 const { ensureLoggedIn } = require('../utils/middlewares');
 const wrapAsync = require("../utils/wrapAsync");
 const { Project } = require("../models/project");
+const { Overview } = require("../models/overview");
+
+
+const { storage } = require('../cloudinary');
+const upload = require('multer')({ storage });
+const { cloudinary } = require("../cloudinary");
 
 const router = express.Router();
 
 router.route('/')
     .get(wrapAsync(async (req, res, next) => {
         const projects = await Project.find({});
-        res.render("projects/main", { projects });
+        const overview = await Overview.findOne({ forArticle: "Programming" });
+        res.render("projects/main", { projects, overview });
     }))
     .post(ensureLoggedIn, wrapAsync(async (req, res, next) => {
         const project = new Project({ ...req.body.project });
         project.save();
         res.redirect('/projects')
     }))
+
+router.post('/overview', ensureLoggedIn, upload.array("overview[images]"), wrapAsync(async (req, res, next) => {
+    console.log(req.body);
+    const overview = await Overview.findOne({ forArticle: "Programming" });
+    if (overview) {
+        for (image of overview.images) {
+            cloudinary.uploader.destroy(image.filename);
+        }
+    }
+    await Overview.deleteMany({ forArticle: "Programming" });
+    const newOverview = new Overview({
+        htmlBody: req.body.overview.htmlBody,
+        forArticle: "Programming"
+    });
+    await newOverview.images.push(...req.files.map(f => ({ url: f.path, filename: f.filename })));
+    newOverview.save();
+    res.redirect("/projects");
+}))
+
 
 router.get('/new', ensureLoggedIn, wrapAsync(async (req, res, next) => {
     res.render("projects/new");
