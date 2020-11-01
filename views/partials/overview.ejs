@@ -1,14 +1,11 @@
 <div class="row" id="current-text">
     <div class="col-12 <%= overview && overview.images.length ? "col-md-7" : "" %>">
         <% if(overview){ %>
-        <%- overview.htmlBody %>
+        <div><%- overview.htmlBody %></div>
         <% } %>
-    </div>
-
-    <div class="col-12">
         <% if(currentUser){ %>
-        <button class="btn btn-primary my-3" id="toggle-edit-form"><%= (overview) ? "Edit" : "Add" %> Overview </button>
-        <% } %>
+            <button class="btn btn-primary my-3" id="toggle-edit-form"><%= (overview) ? "Edit" : "Add" %> Overview </button>
+            <% } %>
     </div>
 
     <% if(overview){ %>

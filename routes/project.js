@@ -25,7 +25,6 @@ router.route('/')
     }))
 
 router.post('/overview', ensureLoggedIn, upload.array("overview[images]"), wrapAsync(async (req, res, next) => {
-    console.log(req.body);
     const overview = await Overview.findOne({ forArticle: "Programming" });
     if (overview) {
         for (image of overview.images) {

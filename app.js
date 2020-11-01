@@ -22,6 +22,7 @@ const overviewRoute = require('./routes/overview');
 const projectRoute = require('./routes/project');
 const cvRoute = require('./routes/cv');
 const adminRoute = require('./routes/admin');
+const photographyRoute = require('./routes/photography');
 
 const { User } = require('./models/user');
 
@@ -98,10 +99,7 @@ app.use('/admin', adminRoute);
 app.use('/overview', overviewRoute);
 app.use('/cv', cvRoute);
 app.use('/projects', projectRoute);
-
-app.get('/photography', (req, res) => {
-    res.render("photography/main", {overview: null});
-})
+app.use('/photography', photographyRoute)
 
 // Error handling
 app.all("*", (req, res, next) => {
