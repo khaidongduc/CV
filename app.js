@@ -108,7 +108,7 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong" } = err;
     if (!err.message) err.message = "Something Went Wrong";
-    res.status(statusCode).send(err.message);
+    res.status(statusCode).render("error", {err});
 })
 
 app.listen(PORT, (req, res) => {

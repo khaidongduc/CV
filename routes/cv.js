@@ -40,7 +40,7 @@ router.route('/')
     }))
 
 
-router.get('/edit', (req, res) => {
+router.get('/edit', ensureLoggedIn, (req, res) => {
     res.render('cv/edit');
 })
 
