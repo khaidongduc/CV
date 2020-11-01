@@ -3,4 +3,5 @@ available routes:
 /cv -> cv
 /projects -> personal project
 /photography -> my photos
-/admin -> login into admin route
+/admin/login -> login to enable editing
+/admin/register -> register 
