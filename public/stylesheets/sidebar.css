@@ -8,6 +8,7 @@
 
 .list-group-item, .sidebar-heading{
     font-family: 'Oswald', sans-serif;
+    position: relative;
 }
 
 .sidebar-wrapper {
@@ -18,6 +19,11 @@
     -o-transition: margin 0.25s ease-out;
     transition: margin 0.25s ease-out;
     font-size: 1.2rem;
+    position: fixed;
+}
+
+#sidebar-padding{
+    position: relative;
 }
 
 #home-nav{
