@@ -26,15 +26,14 @@
                 <a class="card-link btn btn-secondary" href="<%= project.url %>" target="_blank"> Website </a>
                 <% } %>
                 <% if(currentUser){ %>
+                <% let modalData = {id: `Modal${project._id}`, title: `Deleting ${project.title}`, text: `Are you sure you want to delete ${project.title}?`, deleteRoute: `/projects/${project._id}`}; %>
                 <div class="float-right">
                     <a class="card-link btn btn-warning" href="/projects/<%= project._id %>/edit">
                         Edit Project</a>
-
-                    <form class="card-link form-inline" style="display: inline" action="/projects/<%= project._id %>?_method=DELETE" method="post">
-                        <button class="form-control btn btn-danger">Delete Project</button>
-                    </form>
-
+                    <button class="card-link btn btn-danger" data-toggle="modal" data-target="#<%= modalData.id %>">
+                        Delete Project</button>
                 </div>
+                <%- include('../partials/delete-modal', modalData) %>
                 <% } %>
             </div>
         </div>

@@ -63,6 +63,7 @@ router.route('/:projectId')
         const { projectId } = req.params;
         const project = await Project.findByIdAndDelete(projectId);
         res.redirect('/projects');       
+        res.send(projectId);
     }))
 
 module.exports = router;
