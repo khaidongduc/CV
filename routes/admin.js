@@ -6,6 +6,10 @@ const { User } = require("../models/user");
 const { ensureLoggedIn } = require('../utils/middlewares');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+    res.redirect("/admin/login");
+})
+
 router.route('/login')
     .get((req, res, next) => {
         res.render('admin/login');
