@@ -61,7 +61,7 @@ router.route('/:projectId')
     }))
     .delete(ensureLoggedIn, wrapAsync(async (req, res, next) => {
         const { projectId } = req.params;
-        const project = await Project.findByIdAndDelete(projectId);
+        await Project.findByIdAndDelete(projectId);
         res.redirect('/projects');       
         res.send(projectId);
     }))
