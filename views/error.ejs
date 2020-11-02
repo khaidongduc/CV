@@ -1,6 +1,7 @@
 <% layout('layouts/admin') %>
 
 <h1> Code <%= err.statusCode %> </h1>
+<p> <%= err.message %> </p>
 <% if (process.env.NODE_ENV !== "production"){ %>
 <p><%= err.stack %></p>
 <% } %>
