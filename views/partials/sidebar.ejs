@@ -4,7 +4,7 @@
     <!-- elements in here is to pad the actual sidebar -->
     <div class="sidebar-heading">
     </div>
-    <div class="list-group list-group-flush d-block" >
+    <div class="list-group list-group-flush d-block">
     </div>
 </div>
 
@@ -21,10 +21,9 @@
             class="list-group-item list-group-item-action bg-light">Photography</a>
         <% if(currentUser){ %>
         <form action="/admin/logout" method="post">
-            <button id="log-out-button" class="mt-5 list-group-item list-group-item-action bg-light">Log out</button>
+            <button id="log-out-button" class="mt-5 list-group-item list-group-item-action bg-light border-right-0">
+                Log out</button>
         </form>
         <% } %>
-
     </div>
 </div>
-
