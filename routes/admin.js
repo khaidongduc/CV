@@ -14,8 +14,9 @@ router.route('/login')
     .get((req, res, next) => {
         res.render('admin/login');
     })
-    .post(passport.authenticate('local', { failureRedirect: '/admin/login' }), (req, res, next) => {
-        res.redirect('/');
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/admin/login' }), (req, res, next) => {
+        req.flash('success', 'Login successfully');
+        res.redirect('/overview');
     })
 
 router.route('/register')
@@ -24,7 +25,8 @@ router.route('/register')
     })
     .post(wrapAsync(async (req, res, next) => {
         const { username, password, secret } = req.body;
-        if(secret != process.env.SECRET) {
+        if (secret != process.env.SECRET) {
+            req.flash("error", "Something went wrong");
             return res.redirect('/admin/register')
         }
         try {
@@ -32,7 +34,7 @@ router.route('/register')
             req.logIn(newUser, err => {
                 if (err) return next(err);
             });
-            res.redirect('/');
+            res.redirect('/overview');
         } catch (err) {
             res.redirect('/admin/register');
         }
@@ -40,7 +42,8 @@ router.route('/register')
 
 router.post("/logout", ensureLoggedIn, (req, res, next) => {
     req.logOut();
-    res.redirect('/');
+    req.flash('success', 'Log out successfully');
+    res.redirect('/overview');
 })
 
 module.exports = router;

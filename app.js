@@ -46,10 +46,6 @@ db.once("open", () => {
 
 const app = express();
 
-// config flash
-app.use(flash());
-
-
 // config views
 app.engine('ejs', ejsMate);
 app.set("view engine", "ejs");
@@ -77,7 +73,7 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        httpOnly: true,
+        // httpOnly: true,
         // secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week
         maxAge: 1000 * 60 * 60 * 24 * 7
@@ -90,14 +86,18 @@ passport.use(new LocalPassport(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// config flash
+app.use(flash());
 
 // send and flash user info to template
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
     res.locals.flashSuccess = req.flash('success');
-    res.locals.flashError = req.flash('error'); 
+    res.locals.flashError = req.flash('error');
     next();
 })
+
+
 
 // routes
 app.get('/', (req, res) => {
@@ -117,7 +117,7 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong" } = err;
     if (!err.message) err.message = "Something Went Wrong";
-    res.status(statusCode).render("error", {err});
+    res.status(statusCode).render("error", { err });
 })
 
 app.listen(PORT, (req, res) => {
