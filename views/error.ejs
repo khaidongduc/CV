@@ -1,7 +1,8 @@
 <% layout('layouts/admin') %>
 
 <h1> Code <%= err.statusCode %> </h1>
-<p> <%= err.message %> </p>
-<p> <%= err.stack %> </p>
+<% if (process.env.NODE_ENV !== "production"){ %>
+<p><%= err.stack %></p>
+<% } %>
 
 <a class="btn btn-primary" href="/">Return To Home Page</a>
