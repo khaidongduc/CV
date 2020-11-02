@@ -5,12 +5,15 @@ const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/my-cv';
 const SECRET = process.env.SESSION_SECRET || "a secret";
 
+const path = require('path');
+
 const express = require('express');
 const mongoose = require('mongoose');
-const path = require('path');
 const ejsMate = require('ejs-mate');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+
+const flash = require('connect-flash');
 
 const session = require('express-session');
 const passport = require('passport')
@@ -42,6 +45,10 @@ db.once("open", () => {
 
 
 const app = express();
+
+// config flash
+app.use(flash());
+
 
 // config views
 app.engine('ejs', ejsMate);
@@ -84,9 +91,11 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 
-// send user info to template
+// send and flash user info to template
 app.use((req, res, next) => {
     res.locals.currentUser = req.user;
+    res.locals.flashSuccess = req.flash('success');
+    res.locals.flashError = req.flash('error'); 
     next();
 })
 
