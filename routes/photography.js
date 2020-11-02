@@ -32,6 +32,7 @@ router.post('/overview', ensureLoggedIn, upload.array("overview[images]"), wrapA
     });
     await newOverview.images.push(...req.files.map(f => ({ url: f.path, filename: f.filename })));
     newOverview.save();
+    req.flash("success", "Change overview successfully");
     res.redirect("/photography");
 }))
 

@@ -18,7 +18,6 @@ router.route('/')
         } catch (err) {
             overview = null;
         }
-        
         res.render("overview/main", { overview });
     }))
     .post(ensureLoggedIn, upload.array("overview[images]"), wrapAsync(async (req, res, next) => {
@@ -35,6 +34,7 @@ router.route('/')
         });
         await newOverview.images.push(...req.files.map(f => ({ url: f.path, filename: f.filename })));
         newOverview.save();
+        req.flash("success", "Change overview successfully");
         res.redirect("/overview");
     }))
 

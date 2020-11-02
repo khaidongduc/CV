@@ -29,13 +29,14 @@ router.route('/')
             url: req.file.path,
             filename: req.file.filename
         }).save();
-
+        req.flash("success", "Upload successfully");
         res.redirect("/cv");
     }))
     .delete(ensureLoggedIn, wrapAsync(async (req, res) => {
         const cv = await CV.findOne({});
         cloudinary.uploader.destroy(cv.filename);
         await CV.deleteMany({});
+        req.flash("success", "Delete successfully");
         res.redirect('/cv');
     }))
 

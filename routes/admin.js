@@ -34,8 +34,10 @@ router.route('/register')
             req.logIn(newUser, err => {
                 if (err) return next(err);
             });
+            req.flash("success", "Register successfully");
             res.redirect('/overview');
         } catch (err) {
+            req.flash("error", "Something went wrong");
             res.redirect('/admin/register');
         }
     }))
