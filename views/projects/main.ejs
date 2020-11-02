@@ -1,15 +1,13 @@
 <% layout('layouts/normal') %>
 
-<link rel="stylesheet" href="/stylesheets/project.css">
-
 <h1 class="header">Programming</h1>
 
 <%- include('../partials/overview', {overview_post_url: "/projects/overview"}) %>
 <hr>
 <div class="projects-container row">
     <h2 class="col-12"> Personal Projects </h2>
-    <h5 class="col-12">See more at <a target="_blank" href="https://github.com/khaidongduc">
-            https://github.com/khaidongduc </a></h5>
+    <h6 class="col-12">See more at <a target="_blank" href="https://github.com/khaidongduc">
+            https://github.com/khaidongduc </a></h6>
     <% if(projects.length){ %>
     <% projects.forEach(project => { %>
     <div class="mb-3 col-12">
