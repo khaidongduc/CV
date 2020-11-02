@@ -52,11 +52,17 @@ router.get('/:projectId/edit', ensureLoggedIn, wrapAsync(async (req, res, next) 
     res.render("projects/edit", { project });
 }))
 
-router.patch('/:projectId', ensureLoggedIn, wrapAsync(async (req, res, next) => {
-    const { projectId } = req.params;
-    const project = await Project.findByIdAndUpdate(projectId, { ...req.body.project });
-    project.save();
-    res.redirect('/projects');
-}))
+router.route('/:projectId')
+    .patch(ensureLoggedIn, wrapAsync(async (req, res, next) => {
+        const { projectId } = req.params;
+        const project = await Project.findByIdAndUpdate(projectId, { ...req.body.project });
+        project.save();
+        res.redirect('/projects');
+    }))
+    .delete(ensureLoggedIn, wrapAsync(async (req, res, next) => {
+        const { projectId } = req.params;
+        const project = await Project.findByIdAndDelete(projectId);
+        res.redirect('/projects');       
+    }))
 
 module.exports = router;

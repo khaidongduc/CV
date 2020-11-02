@@ -9,7 +9,7 @@
 <div class="projects-container row">
     <h2 class="col-12"> Personal Projects </h2>
     <h5 class="col-12">See more at <a href="https://github.com/khaidongduc">
-        https://github.com/khaidongduc </a></h5>
+            https://github.com/khaidongduc </a></h5>
     <% if(projects.length){ %>
     <% projects.forEach(project => { %>
     <div class="mb-3 col-12">
@@ -26,8 +26,15 @@
                 <a class="card-link btn btn-secondary" href="<%= project.url %>" target="_blank"> Website </a>
                 <% } %>
                 <% if(currentUser){ %>
-                <a class="card-link btn btn-danger float-right" href="/projects/<%= project._id %>/edit">
-                    Edit Project</a>
+                <div class="float-right">
+                    <a class="card-link btn btn-warning" href="/projects/<%= project._id %>/edit">
+                        Edit Project</a>
+
+                    <form class="card-link form-inline" style="display: inline" action="/projects/<%= project._id %>?_method=DELETE" method="post">
+                        <button class="form-control btn btn-danger">Delete Project</button>
+                    </form>
+
+                </div>
                 <% } %>
             </div>
         </div>
@@ -35,7 +42,7 @@
     <% }) %>
     <% if(currentUser){ %>
     <div class="mb-3 col-12 card border-0">
-        <a class="card-link btn btn-primary" href="/projects/new"> New Project </a>
+        <a class="card-link btn btn-primary" href="/projects/new">New Project</a>
     </div>
     <% } %>
 </div>
