@@ -1,5 +1,5 @@
 :root{
-    --sidebar-size: 17.5rem;
+    --sidebar-size: 16rem;
 }
 
 #wrapper {
@@ -9,16 +9,6 @@
 .list-group-item, .sidebar-heading{
     font-family: 'Oswald', sans-serif;
     position: relative;
-}
-
-#home-nav{
-    color: #dae0e5 !important;
-    font-size: 2.2rem;
-}
-
-
-.list-group-item-action{
-    color: #dae0e5;
 }
 
 .list-group-item {
@@ -40,6 +30,10 @@
     position: relative;
 }
 
+#home-nav{
+    color: #145a80;
+}
+
 #home-nav:hover{
     text-decoration: none;
 }
@@ -50,6 +44,7 @@
 
 .sidebar-wrapper .sidebar-heading {
     padding: 0.875rem 1.25rem;
+    padding-top: rem;
 }
 
 .sidebar-wrapper .list-group {
