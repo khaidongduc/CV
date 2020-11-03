@@ -1,10 +1,28 @@
 body{
     font-family: 'Open Sans', sans-serif;
+    background: url("/images/background.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.overview-container{
+    padding: 1.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid rgba(0, 0, 0, .125)
+}
+
+.overview-container, .card{
+    background-color: rgba(255, 255, 255, .825);
+}
+
+
+.small-header, .header{
+    color: black;
 }
 
 .header{
     font-size: 4.0rem;
-    border-bottom: 10px skyblue solid;
+    border-bottom: 10px rgb(255, 238, 180) solid;
     text-align: left;
     margin-bottom: 20px;
     padding-bottom: 10px;
