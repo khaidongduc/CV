@@ -16,7 +16,9 @@ router.route('/login')
     })
     .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/admin/login' }), (req, res, next) => {
         req.flash('success', 'Login successfully');
-        res.redirect('/overview');
+        const redirectUrl = req.session.returnTo || '/campgrounds';
+        delete req.session.returnTo;
+        res.redirect(redirectUrl);
     })
 
 router.route('/register')
