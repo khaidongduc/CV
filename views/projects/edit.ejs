@@ -1,57 +1,52 @@
 <% layout('layouts/admin') %>
 
-<div class="row">
-    <div class="col-10 offset-1 col-md-6 offset-md-3 mb-3">
-        <h1 class="mx-auto">Edit Project</h1>
-        <form class="d-inline validated-form" action="/projects/<%= project._id %>?_method=PATCH" method="POST"
-            novalidate>
-            <div class="mb-3">
-                <label class="form-label" for="title">Title</label>
-                <input class="form-control" type="text" id="title" name="project[title]" required autofocus
-                    value="<%=project.title %>">
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="url">Project URL</label>
-                <input rows="5" class="form-control" type="url" id="url" name="project[url]" value="<%= project.url %>"
-                    required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="repository"> Repository </label>
-                <input rows="5" class="form-control" type="text" id="repository" name="project[repository]"
-                    value="<%= project.repository %>" required>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="description">Description</label>
-                <textarea rows="5" class="form-control" type="text" id="description" name="project[description]"
-                    required><%= project.description %></textarea>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label" for="description-html">HTML Description (Optional)</label>
-                <textarea rows="5" class="form-control" type="text" id="html-description"
-                    name="project[htmlDescription]"><%= project.htmlDescription %></textarea>
-                <div class="valid-feedback">
-                    Looks good
-                </div>
-            </div>
-
-            <button class="btn btn-success">Edit Project</button>
-        </form>
-        <a class="d-inline btn btn-primary" href="/projects">Back</a>
+<h1 class="mx-auto">Edit Project</h1>
+<form class="d-inline validated-form" action="/projects/<%= project._id %>?_method=PATCH" method="POST" novalidate>
+    <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" type="text" id="title" name="project[title]" required autofocus
+            value="<%=project.title %>">
+        <div class="valid-feedback">
+            Looks good
+        </div>
     </div>
-</div>
+
+    <div class="mb-3">
+        <label class="form-label" for="url">Project URL</label>
+        <input rows="5" class="form-control" type="url" id="url" name="project[url]" value="<%= project.url %>"
+            required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="repository"> Repository </label>
+        <input rows="5" class="form-control" type="text" id="repository" name="project[repository]"
+            value="<%= project.repository %>" required>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea rows="5" class="form-control" type="text" id="description" name="project[description]"
+            required><%= project.description %></textarea>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="description-html">HTML Description (Optional)</label>
+        <textarea rows="5" class="form-control" type="text" id="html-description"
+            name="project[htmlDescription]"><%= project.htmlDescription %></textarea>
+        <div class="valid-feedback">
+            Looks good
+        </div>
+    </div>
+
+    <button class="btn btn-success">Edit Project</button>
+</form>
+<a class="d-inline btn btn-primary" href="/projects">Back</a>
