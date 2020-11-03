@@ -13,11 +13,12 @@
 
 .list-group-item {
     border: none;
+    background-color: transparent;
 }
-/* 
+
 .bg-light{
-    background-color: rgb(248, 249, 250, 0.58) !important;
-} */
+    background-color: rgba(255, 255, 255, 0.58) !important;
+}
 
 .sidebar-wrapper {
     min-height: 100vh;
@@ -28,6 +29,7 @@
     transition: margin 0.25s ease-out;
     font-size: 1.2rem;
     position: fixed;
+    background-color: transparent;
 }
 
 #sidebar-padding{
@@ -35,8 +37,11 @@
 }
 
 #home-nav{
-    color: #145a80;
     font-size: 2.5rem;
+}
+
+#home-nav, .list-group-item{
+    color: #131313c0;
 }
 
 #home-nav:hover{
@@ -80,11 +85,9 @@
 }
 
 .current-nav{
-    background-color: #dae0e5 !important;
-    color: #495057;
+    background-color: rgb(248, 249, 250, 0.65) !important;
 }
 
 a.list-group-item:hover, #log-out-button:hover{
-    background-color: #dae0e5 !important;
-    color: #495057;
+    background-color: rgb(248, 249, 250, 0.60) !important;
 }
