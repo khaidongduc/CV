@@ -1,5 +1,5 @@
 :root{
-    --sidebar-size: 16rem;
+    --sidebar-size: 17.5rem;
 }
 
 #wrapper {
@@ -9,6 +9,20 @@
 .list-group-item, .sidebar-heading{
     font-family: 'Oswald', sans-serif;
     position: relative;
+}
+
+#home-nav{
+    color: #dae0e5 !important;
+    font-size: 2.2rem;
+}
+
+
+.list-group-item-action{
+    color: #dae0e5;
+}
+
+.list-group-item {
+    border: none;
 }
 
 .sidebar-wrapper {
@@ -26,10 +40,6 @@
     position: relative;
 }
 
-#home-nav{
-    color: #145a80;
-}
-
 #home-nav:hover{
     text-decoration: none;
 }
@@ -40,7 +50,6 @@
 
 .sidebar-wrapper .sidebar-heading {
     padding: 0.875rem 1.25rem;
-    padding-top: rem;
 }
 
 .sidebar-wrapper .list-group {
@@ -72,8 +81,10 @@
 
 .current-nav{
     background-color: #dae0e5 !important;
+    color: #495057;
 }
 
-a.list-group-item:hover{
+a.list-group-item:hover, #log-out-button:hover{
     background-color: #dae0e5 !important;
+    color: #495057;
 }
