@@ -1,39 +1,17 @@
 const express = require('express');
 
-const { ensureLoggedIn } = require('../utils/middlewares');
-
-const { Overview } = require("../models/overview");
-
 const { storage } = require('../cloudinary');
 const upload = require('multer')({ storage });
-const { cloudinary } = require("../cloudinary");
 
+const controller = require('../controllers/photography');
 const wrapAsync = require("../utils/wrapAsync");
-
+const { ensureLoggedIn } = require('../utils/middlewares');
 
 const router = express.Router();
 
-router.get('/', wrapAsync(async (req, res, next) => {
-    const overview = await Overview.findOne({ forArticle: "Photography" });
-    res.render("photography/main", { overview });
-}))
+router.get('/', wrapAsync(controller.renderPhotographyMainPage))
 
-router.post('/overview', ensureLoggedIn, upload.array("overview[images]"), wrapAsync(async (req, res, next) => {
-    const overview = await Overview.findOne({ forArticle: "Photography" });
-    if (overview) {
-        for (image of overview.images) {
-            cloudinary.uploader.destroy(image.filename);
-        }
-    }
-    await Overview.deleteMany({ forArticle: "Photography" });
-    const newOverview = new Overview({
-        htmlBody: req.body.overview.htmlBody,
-        forArticle: "Photography"
-    });
-    await newOverview.images.push(...req.files.map(f => ({ url: f.path, filename: f.filename })));
-    newOverview.save();
-    req.flash("success", "Change overview successfully");
-    res.redirect("/photography");
-}))
+router.post('/overview', ensureLoggedIn, upload.array("overview[images]"), 
+            wrapAsync(controller.createNewOverview))
 
 module.exports = router;
