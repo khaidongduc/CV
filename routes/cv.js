@@ -1,48 +1,19 @@
 const express = require('express');
 
-const { ensureLoggedIn } = require('../utils/middlewares');
-
 const { storage } = require('../cloudinary');
 const upload = require('multer')({ storage });
-const { cloudinary } = require("../cloudinary");
 
+const { ensureLoggedIn } = require('../utils/middlewares');
 const wrapAsync = require("../utils/wrapAsync");
-const { CV } = require("../models/cv");
+const controller = require('../controllers/cv');
 
 const router = express.Router();
 
 router.route('/')
-    .get(wrapAsync(async (req, res) => {
-        var cv;
-        try {
-            cv = await CV.findOne({});
-        } catch (error) {
-            cv = null;
-        }
-        res.render("cv/main", { cv });
-    }))
-    .post(ensureLoggedIn, upload.single("cv"), wrapAsync(async (req, res) => {
-        const cv = await CV.findOne({});
-        if (cv) cloudinary.uploader.destroy(`${cv.filename}`);
-        await CV.deleteMany({});
-        await new CV({
-            url: req.file.path,
-            filename: req.file.filename
-        }).save();
-        req.flash("success", "Upload successfully");
-        res.redirect("/cv");
-    }))
-    .delete(ensureLoggedIn, wrapAsync(async (req, res) => {
-        const cv = await CV.findOne({});
-        cloudinary.uploader.destroy(cv.filename);
-        await CV.deleteMany({});
-        req.flash("success", "Delete successfully");
-        res.redirect('/cv');
-    }))
+    .get(wrapAsync(controller.renderCVMainPage))
+    .post(ensureLoggedIn, upload.single("cv"), wrapAsync(controller.replaceCV))
+    .delete(ensureLoggedIn, wrapAsync(controller.deleteCV));
 
-
-router.get('/edit', ensureLoggedIn, (req, res) => {
-    res.render('cv/edit');
-})
+router.get('/edit', ensureLoggedIn, controller.renderEditForm);
 
 module.exports = router;
