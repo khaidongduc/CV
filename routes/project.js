@@ -3,13 +3,10 @@ const express = require('express');
 const { ensureLoggedIn } = require('../utils/middlewares');
 const wrapAsync = require("../utils/wrapAsync");
 
-
 const { storage } = require('../cloudinary');
 const upload = require('multer')({ storage });
-const { cloudinary } = require("../cloudinary");
 
 const controller = require('../controllers/project');
-const { createNewOverview } = require('../controllers/photography');
 
 const router = express.Router();
 

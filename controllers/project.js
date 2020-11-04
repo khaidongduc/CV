@@ -1,6 +1,7 @@
 const { Project } = require("../models/project");
 const { Overview } = require("../models/overview");
 
+const { cloudinary } = require("../cloudinary");
 
 module.exports.renderProjectMainPage = async function (req, res, next) {
     const projects = await Project.find({});
