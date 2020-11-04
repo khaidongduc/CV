@@ -15,12 +15,12 @@ body{
 
 .small-header, .header{
     color: #202225;
-    text-shadow: 0.1px 0.1px 0px rgba(255, 255, 255, 0.25);
+    text-shadow: 0.5px 0.5px 0.5px rgba(255, 255, 255, 0.25);
 }
 
 .header{
     font-size: 4.0rem;
-    border-bottom: 10px rgb(255, 238, 180) solid;
+    border-bottom: 10px rgba(255, 238, 180, 0.95) solid;
     text-align: left;
     margin-bottom: 20px;
     padding-bottom: 10px;
