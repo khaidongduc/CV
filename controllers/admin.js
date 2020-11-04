@@ -41,5 +41,7 @@ module.exports.registerNewUser = async function (req, res, next){
 module.exports.logOutUser = function(req, res, next){
     req.logOut();
     req.flash('success', 'Log out successfully');
-    res.redirect('/overview');
+    const redirectUrl = req.session.returnTo || '/overview';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
 }
