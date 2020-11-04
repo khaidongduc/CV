@@ -2,52 +2,22 @@ const express = require('express');
 const passport = require('passport')
 
 const wrapAsync = require("../utils/wrapAsync");
-const { User } = require("../models/user");
 const { ensureLoggedIn } = require('../utils/middlewares');
+const controller = require('../controllers/admin');
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.redirect("/admin/login");
-})
+router.get('/', controller.redirectLogin);
 
 router.route('/login')
-    .get((req, res, next) => {
-        res.render('admin/login');
-    })
-    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/admin/login' }), (req, res, next) => {
-        req.flash('success', 'Login successfully');
-        const redirectUrl = req.session.returnTo || '/overview';
-        delete req.session.returnTo;
-        res.redirect(redirectUrl);
-    })
+    .get(controller.renderLoginForm)
+    .post(passport.authenticate('local', { failureFlash: true, failureRedirect: '/admin/login' }),
+          controller.loginFlashAndRedirect)
 
 router.route('/register')
-    .get((req, res, next) => {
-        res.render('admin/register');
-    })
-    .post(wrapAsync(async (req, res, next) => {
-        const { username, password, secret } = req.body;
-        if (secret != process.env.SECRET) {
-            req.flash("error", "Something went wrong");
-            return res.redirect('/admin/register')
-        }
-        try {
-            const newUser = await User.register(new User({ username }), password);
-            req.logIn(newUser, err => {
-                if (err) return next(err);
-            });
-            req.flash("success", "Register successfully");
-            res.redirect('/overview');
-        } catch (err) {
-            req.flash("error", "Something went wrong");
-            res.redirect('/admin/register');
-        }
-    }))
+    .get(controller.renderLoginForm)
+    .post(wrapAsync(controller.registerNewUser));
 
-router.post("/logout", ensureLoggedIn, (req, res, next) => {
-    req.logOut();
-    req.flash('success', 'Log out successfully');
-    res.redirect('/overview');
-})
+router.post("/logout", ensureLoggedIn, controller.logOutUser)
 
 module.exports = router;
