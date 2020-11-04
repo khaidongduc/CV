@@ -15,6 +15,8 @@ const methodOverride = require('method-override');
 
 const flash = require('connect-flash');
 
+const helmet = require('helmet');
+
 const session = require('express-session');
 const passport = require('passport')
 const LocalPassport = require('passport-local');
@@ -73,8 +75,8 @@ const sessionConfig = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        // httpOnly: true,
-        // secure: true,
+        httpOnly: true,
+        secure: true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7, // a week
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -85,6 +87,40 @@ app.use(passport.session());
 passport.use(new LocalPassport(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+// config helmet
+app.use(helmet());
+const scriptSrcUrls = [];
+const styleSrcUrls = [
+    "https://fonts.googleapis.com/",
+];
+const connectSrcUrls = [];
+const fontSrcUrls = [
+    "https://fonts.gstatic.com"
+];
+const imgSrcUrls = [
+    "https://source.unsplash.com/",
+    "https://images.unsplash.com/",
+    "https://res.cloudinary.com/dbgsbqpht/"
+];
+const frameSrcUrls = [
+    "https://res.cloudinary.com/dbgsbqpht/"
+]
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'", ...connectSrcUrls],
+            scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+            styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+            workerSrc: ["'self'", "blob:"],
+            objectSrc: [],
+            imgSrc: ["'self'", "blob:", "data:", ...imgSrcUrls],
+            fontSrc: ["'self'", ...fontSrcUrls],
+            frameSrc: ["'self'", ...frameSrcUrls]
+        },
+    })
+);
 
 // config flash
 app.use(flash());
